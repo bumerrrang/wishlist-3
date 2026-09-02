@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 
+// for the initial commit and adding the github remote
 @Component({
   selector: 'app-root',
   standalone: false,

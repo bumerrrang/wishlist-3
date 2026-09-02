@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { WishItem } from '../shared/models/wishItem';
 
 // for the initial commit and adding the github remote
 @Component({
@@ -9,4 +10,9 @@ import { Component, signal } from '@angular/core';
 })
 export class App {
   protected readonly title = signal('wishlist-3');
+  items = [
+    new WishItem('Learn Angular'),
+    new WishItem('Get Coffee', true),
+    new WishItem('Find grass that cuts itself'),
+  ];
 }

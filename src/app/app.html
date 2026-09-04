@@ -351,12 +351,21 @@
   } @else {
     <ul class="wish-list">
 <!--      NB! Impossible to put two structural directives in one element!-->
-      @for (item of items; track item) {
+<!--      Using JavaScript property 'checkbox' as opposed to html attribute 'checked'-->
+<!--      Binding - surround JavaScript property with [] and assing the JavaScript expression-->
+<!--      #367 using attribute 'data-index' to access the index of the item in the list-->
+      @for (item of items; track item; let index = $index) {
+<!--        <li *ngFor="let item of items; index as ii">-->
         <li>
           <div class="form-check">
             <label class="form-check-label">
-              <input class="checkbox" type="checkbox">
-              {{ item.wishText }}
+              <!-- #366 binding with the app component 'isComplete' field-->
+              <input
+                class="checkbox"
+                type="checkbox"
+              [checked]="item.isComplete"
+              [attr.data-index]="index">
+              {{ index + 1 }}.{{ item.wishText }}
             </label>
           </div>
         </li>
@@ -364,16 +373,23 @@
     </ul>
   }
 
-<!--  <div *ngIf="items.length === 0; else showItems"> OLDER DEPRECATED VERSION-->
+<!--  <div class="container">-->
+
+<!--  <div *ngIf="items.length === 0; else showItems">-->
 <!--    There are no wishes to display.-->
 <!--  </div>-->
 
 <!--  <ng-template #showItems>-->
 <!--    <ul class="wish-list">-->
-<!--      <li *ngFor="let item of items">-->
+<!--      <li *ngFor="let item of items; index as ii">-->
 <!--        <div class="form-check">-->
 <!--          <label class="form-check-label">-->
-<!--            <input class="checkbox" type="checkbox"> {{item.wishText}}-->
+<!--            <input-->
+<!--              class="checkbox"-->
+<!--              type="checkbox"-->
+<!--              [checked]="item.isComplete"-->
+<!--              [attr.data-index]="ii"-->
+<!--            > {{item.wishText}}-->
 <!--          </label>-->
 <!--        </div>-->
 <!--      </li>-->

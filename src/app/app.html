@@ -344,16 +344,39 @@
 <!--<router-outlet />-->
 
 <div class="container">
-  <ul class="wish-list">
-<!--    <li *ngFor="let item of items">   OLDER DEPRECATED VERSION -->
-    @for (item of items; track item) {
-      <li>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input class="checkbox" type="checkbox"> {{item.wishText}}
-        </label>
-      </div>
-      </li>
-    }
-  </ul>
+  @if (items.length === 0) {
+    <div>
+      There are no wishes to display.
+    </div>
+  } @else {
+    <ul class="wish-list">
+<!--      NB! Impossible to put two structural directives in one element!-->
+      @for (item of items; track item) {
+        <li>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="checkbox" type="checkbox">
+              {{ item.wishText }}
+            </label>
+          </div>
+        </li>
+      }
+    </ul>
+  }
+
+<!--  <div *ngIf="items.length === 0; else showItems"> OLDER DEPRECATED VERSION-->
+<!--    There are no wishes to display.-->
+<!--  </div>-->
+
+<!--  <ng-template #showItems>-->
+<!--    <ul class="wish-list">-->
+<!--      <li *ngFor="let item of items">-->
+<!--        <div class="form-check">-->
+<!--          <label class="form-check-label">-->
+<!--            <input class="checkbox" type="checkbox"> {{item.wishText}}-->
+<!--          </label>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </ng-template>-->
 </div>

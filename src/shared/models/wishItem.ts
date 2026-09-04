@@ -1,6 +1,6 @@
 export class WishItem {
   constructor(
     public wishText: string,
-    public isComplete: boolean = false,
+    public isComplete: boolean = false,  // default value
   ) {}
 }

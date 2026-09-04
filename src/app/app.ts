@@ -9,10 +9,10 @@ import { WishItem } from '../shared/models/wishItem';
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly title = signal('wishlist-3');
+//  protected readonly title = signal('wishlist-3');
   items = [
     new WishItem('Learn Angular'),
     new WishItem('Get Coffee', true),
-    new WishItem('Find grass that cuts itself'),
+    new WishItem('Find grass that cuts itself')
   ];
 }

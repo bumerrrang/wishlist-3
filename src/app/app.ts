@@ -10,7 +10,7 @@ import { WishItem } from '../shared/models/wishItem';
 })
 export class App {
 //  protected readonly title = signal('wishlist-3');
-  items = [
+  items : WishItem[] = [
     new WishItem('Learn Angular'),
     new WishItem('Get Coffee', true),
     new WishItem('Find grass that cuts itself')

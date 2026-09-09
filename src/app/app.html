@@ -344,39 +344,61 @@
 <!--<router-outlet />-->
 
 <div class="container">
-  @if (items.length === 0) {
-    <div>
-      There are no wishes to display.
+
+<!--  template driven forms-->
+  <form class="row mt-3 gx-3 gy-2 align-items-center justify-content-center">
+    <div class="col-sm-6">
+      <label class="visually-hidden" for="specificSizeInputName">Wish</label>
+<!--      [(ngModel)]="newWishText"-->
+<!--      ngModel - binding input with the class field-->
+      <input type="text" name="new-wish-text" class="form-control" [(ngModel)]="newWishText">
     </div>
-  } @else {
-    <ul class="wish-list">
-<!--      NB! Impossible to put two structural directives in one element!-->
-<!--      Using JavaScript property 'checkbox' as opposed to html attribute 'checked'-->
-<!--      Binding - surround JavaScript property with [] and assing the JavaScript expression-->
-<!--      #367 using attribute 'data-index' to access the index of the item in the list-->
-      @for (item of items; track item; let index = $index) {
-<!--        <li *ngFor="let item of items; index as ii">-->
-        <li>
-          <div class="form-check">
-            <label class="form-check-label">
-              <!-- #370 [checked] - JavaScript expression, binding with the app component 'isComplete' field-->
-              <!-- simply checked - an html attribute, is it true or false or empty - it works the same-->
-              <!-- [attr.data-index] - defines an attribute, the 'attr' part is a special JavaScript part-->
-              <!-- () - binding events in Angular with JavaScript for execution/extra Angular function -->
-              <!-- #372 - one way binding, clicking on an item does dot change the object state-->
-              <input
-                class="checkbox"
-                type="checkbox"
-                [checked]="item.isComplete"
-                [attr.data-index]="index"
-                (click)="toggleItem(item)" )>
-              {{ index + 1 }}.{{ item.wishText }}
-            </label>
-          </div>
-        </li>
-      }
-    </ul>
-  }
+    <div class="col-auto">
+      <!-- #359 processing event, preventDefault - preventing being submitted, default behaviour, $event - get access to event object
+       we can execute multiple statements, so one more calling method is 'addNewWish()'-->
+      <button
+        type="submit"
+        class="btn btn-primary"
+        (click)="$event.preventDefault(); addNewWish()"
+      >Add Wish</button>
+    </div>
+  </form>
+
+  <div class="row mt-3">
+    @if (items.length === 0) {
+      <div>
+        There are no wishes to display.
+      </div>
+    } @else {
+      <ul class="wish-list">
+  <!--      NB! Impossible to put two structural directives in one element!-->
+  <!--      Using JavaScript property 'checkbox' as opposed to html attribute 'checked'-->
+  <!--      Binding - surround JavaScript property with [] and assing the JavaScript expression-->
+  <!--      #367 using attribute 'data-index' to access the index of the item in the list-->
+        @for (item of items; track item; let index = $index) {
+  <!--        <li *ngFor="let item of items; index as ii">-->
+          <li>
+            <div class="form-check">
+              <label class="form-check-label">
+                <!-- #389 [checked] - JavaScript expression, binding with the app component 'isComplete' field-->
+                <!-- #389 - one way binding, clicking on an item does dot change the object state-->
+                <!-- simply checked - an html attribute, is it true or false or empty - it works the same-->
+                <!-- [attr.data-index] - defines an attribute, the 'attr' part is a special JavaScript part-->
+                <!-- (click) - binding events (two-way binding) in Angular with JavaScript for execution/extra Angular function -->
+                <input
+                  class="checkbox"
+                  type="checkbox"
+                  [checked]="item.isComplete"
+                  [attr.data-index]="index"
+                  (click)="toggleItem(item)" )>
+                {{ index + 1 }}.{{ item.wishText }}
+              </label>
+            </div>
+          </li>
+        }
+      </ul>
+    }
+  </div>
 
 <!--  <div class="container">-->
 

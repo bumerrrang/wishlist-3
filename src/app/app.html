@@ -359,12 +359,14 @@
         <li>
           <div class="form-check">
             <label class="form-check-label">
-              <!-- #366 binding with the app component 'isComplete' field-->
+              <!-- #368 [checked] - JavaScript expression, binding with the app component 'isComplete' field-->
+              <!-- simply checked - an html attribute, is it true or false or empty - it works the same-->
+              <!-- [attr.data-index] - defines an attribute, the 'attr' part is a special JavaScript part-->
               <input
                 class="checkbox"
                 type="checkbox"
-              [checked]="item.isComplete"
-              [attr.data-index]="index">
+                [checked]="item.isComplete"
+                [attr.data-index]="index">
               {{ index + 1 }}.{{ item.wishText }}
             </label>
           </div>

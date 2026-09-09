@@ -359,14 +359,17 @@
         <li>
           <div class="form-check">
             <label class="form-check-label">
-              <!-- #368 [checked] - JavaScript expression, binding with the app component 'isComplete' field-->
+              <!-- #370 [checked] - JavaScript expression, binding with the app component 'isComplete' field-->
               <!-- simply checked - an html attribute, is it true or false or empty - it works the same-->
               <!-- [attr.data-index] - defines an attribute, the 'attr' part is a special JavaScript part-->
+              <!-- () - binding events in Angular with JavaScript for execution/extra Angular function -->
+              <!-- #372 - one way binding, clicking on an item does dot change the object state-->
               <input
                 class="checkbox"
                 type="checkbox"
                 [checked]="item.isComplete"
-                [attr.data-index]="index">
+                [attr.data-index]="index"
+                (click)="toggleItem(item)" )>
               {{ index + 1 }}.{{ item.wishText }}
             </label>
           </div>

@@ -15,4 +15,10 @@ export class App {
     new WishItem('Get Coffee', true),
     new WishItem('Find grass that cuts itself')
   ];
+
+  protected toggleItem(e: WishItem) {
+    console.log('clicked!');
+    console.log(e);
+    e.isComplete = !e.isComplete;  // toggling by hand, as there is only one way binding
+  }
 }

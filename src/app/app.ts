@@ -11,12 +11,15 @@ import { WishItem } from '../shared/models/wishItem';
 export class App {
   //  protected readonly title = signal('wishlist-3');
   items: WishItem[] = [
-    // new WishItem('Learn Angular'),
-    // new WishItem('Get Coffee', true),
-    // new WishItem('Find grass that cuts itself'),
+    new WishItem('Learn Angular'),
+    new WishItem('Get Coffee', true),
+    new WishItem('Find grass that cuts itself'),
   ];
 
-  newWishText = ''; // user inputs new wish item
+  protected listFilter: String = '0';
+  protected newWishText = ''; // user inputs new wish item
+  protected visibleItems: WishItem[] = this.items;
+  private newWishItem: WishItem | undefined;
 
   protected addNewWish() {
     console.log('Adding new wish');
@@ -26,7 +29,10 @@ export class App {
       return;
     }
 
-    this.items.push(new WishItem(trimmedWishText)); // adding new item to the collection
+    this.newWishItem = new WishItem(trimmedWishText);
+    // this.items.push(new WishItem(trimmedWishText)); // adding new item to the collection
+    this.items.push(this.newWishItem);
+    this.visibleItems.push(this.newWishItem)
     this.clearPendingWishText(); // clear the textbox
   }
 
@@ -38,5 +44,18 @@ export class App {
 
   private clearPendingWishText() {
     this.newWishText = '';
+  }
+
+  protected filterChanged($event: any) {
+    console.log('filterChanged');
+    console.log($event);
+
+    if ($event === '0') {
+      this.visibleItems = this.items;
+    } else if ($event === '1') {
+      this.visibleItems = this.items.filter((item) => !item.isComplete);
+    } else {
+      this.visibleItems = this.items.filter((item) => item.isComplete);
+    }
   }
 }
